@@ -12,13 +12,20 @@ class Replagex:
 
     def load_from_json_file(self, file):
         with open(file, 'r') as f:
-            data = json.load(f)
+            try:
+                data = json.load(f)
+            except Exception as e:
+                raise Exception('Failed to load JSON file "%s" ' % file +
+                                str(e))
 
         for patt in data['patterns']:
+            if not ('regex' in patt.keys()):
+                continue
+
             self.patterns.append(
                 Pattern(
                     patt['regex'],
-                    patt['replace'],
+                    patt.get('replace', ''),
                     patt.get('dotall', False)
                 )
             )
