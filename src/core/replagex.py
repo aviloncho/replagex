@@ -15,7 +15,7 @@ class Replagex:
             try:
                 data = json.load(f)
             except Exception as e:
-                raise Exception('Failed to load JSON file "%s" ' % file +
+                raise Exception(f'Failed to load JSON file "{file}": ' +
                                 str(e))
 
         for patt in data['patterns']:
@@ -40,5 +40,10 @@ class Replagex:
                 regex = re.compile(patt.regex, re.DOTALL)
             else:
                 regex = re.compile(patt.regex)
-            result = regex.sub(patt.replace, result)
+            try:
+                result = regex.sub(patt.replace, result)
+            except Exception as e:
+                raise Exception(f'Failed to replace "{patt.replace}" ' +
+                                f'on regex "{patt.regex}": ' + str(e))
+
         return result
