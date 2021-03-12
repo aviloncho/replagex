@@ -1,0 +1,12 @@
+{
+    "patterns": [
+        {
+            "regex": "<table.*?>",
+            "replace": ""
+        },
+        {
+            "regex": "<\/table>",
+            "replace": ""
+        }
+    ]
+}
