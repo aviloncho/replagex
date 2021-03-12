@@ -5,10 +5,12 @@ from .pattern import Pattern
 
 
 class Replagex:
-    patterns = []
 
-    def __init__(self, file):
-        self.load_from_json_file(file)
+    def __init__(self, json_file=None):
+        self.patterns: list = []
+
+        if json_file:
+            self.load_from_json_file(json_file)
 
     def load_from_json_file(self, file):
         with open(file, 'r') as f:
