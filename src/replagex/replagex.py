@@ -28,7 +28,9 @@ class Replagex:
                 Pattern(
                     patt['regex'],
                     patt.get('replace', ''),
-                    patt.get('dotall', False)
+                    patt.get('dotall', False),
+                    patt.get('ignore_case', False),
+                    patt.get('multiline', False)
                 )
             )
 
@@ -38,10 +40,8 @@ class Replagex:
             return result
 
         for patt in self.patterns:
-            if patt.dotall:
-                regex = re.compile(patt.regex, re.DOTALL)
-            else:
-                regex = re.compile(patt.regex)
+            regex = re.compile(patt.regex, flags=patt.flags())
+
             try:
                 result = regex.sub(patt.replace, result)
             except Exception as e:
