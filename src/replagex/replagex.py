@@ -34,6 +34,12 @@ class Replagex:
                 )
             )
 
+    def add_pattern(self, pattern):
+        if isinstance(pattern, Pattern):
+            self.patterns.append(pattern)
+        else:
+            raise Exception("The pattern sent is not a Pattern instance.")
+
     def apply_regex(self, text):
         result = text
         if not self.patterns:

@@ -1,7 +1,8 @@
 import unittest
 from pathlib import Path
 
-from src.core import Replagex
+from src.replagex import Replagex
+from src.replagex.pattern import Pattern
 
 
 class TestReplagex(unittest.TestCase):
@@ -20,6 +21,28 @@ class TestReplagex(unittest.TestCase):
 
         rg = Replagex(json_file)
         self.assertIsInstance(rg, Replagex)
+
+    def test_add_pattern(self):
+        """
+        Test Replagex add_pattern method.
+        """
+        rg = Replagex()
+
+        rg.add_pattern(
+            Pattern(
+                '.*(Hello).*',
+                'Replaced Text: $1'
+            )
+        )
+
+    def test_add_wrong_pattern(self):
+        """
+        Test Replagex add_pattern method with wrong value.
+        """
+        rg = Replagex()
+
+        with self.assertRaises(Exception):
+            rg.add_pattern('.*(Hello).*')
 
 
 if __name__ == '__main__':
