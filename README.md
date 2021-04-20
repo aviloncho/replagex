@@ -1,7 +1,7 @@
 # replagex
 Use replagex to easily replace massive strings on any text using regex.
 
-## Intall
+## Install
 
 Currently downloadable from [TestPyPI](https://test.pypi.org/project/replagex-pkg/)
 
